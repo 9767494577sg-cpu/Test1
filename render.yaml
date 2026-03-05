@@ -4,6 +4,9 @@ services:
     env: python
     buildCommand: pip install -r backend/requirements.txt
     startCommand: cd backend && gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    domains:
+      - sushantfit.com
+      - www.sushantfit.com
     envVars:
       - key: JWT_SECRET
         generateValue: true
