@@ -66,7 +66,8 @@ curl -X POST http://localhost:5000/api/runs \
 1. Fork this repository
 2. Go to [render.com](https://render.com) → **New Web Service**
 3. Connect your repo – Render auto-detects `render.yaml`
-4. Click **Deploy** – your app will be live at `https://fitlife-pwa.onrender.com`
+4. Click **Deploy** – your app will be live
+5. Point your DNS for `sushantfit.com` to the Render service, then the app will be available at **https://sushantfit.com**
 
 ---
 

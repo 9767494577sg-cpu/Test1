@@ -32,7 +32,12 @@ from utils.ai_coach import (
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
 
 app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+_ALLOWED_ORIGINS = ["https://sushantfit.com", "https://www.sushantfit.com"]
+if os.environ.get("FLASK_ENV", "development") != "production":
+    _ALLOWED_ORIGINS += ["http://localhost:5000", "http://127.0.0.1:5000"]
+
+CORS(app, resources={r"/api/*": {"origins": _ALLOWED_ORIGINS}})
 
 # ---------------------------------------------------------------------------
 # Auth middleware
