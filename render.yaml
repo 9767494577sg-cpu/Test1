@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: fitlife-pwa
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PASSWORD_SALT
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000

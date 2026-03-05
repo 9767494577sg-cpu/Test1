@@ -21,6 +21,55 @@ A comprehensive fitness tracking Progressive Web App (PWA) with full web and mob
 - **🤖 AI Fitness Coach** – Personalized plans, chat assistant, workout suggestions
 - **📱 PWA Support** – Install on mobile, offline support, push notifications
 
+## ⚡ Quick Start (Local Testing)
+
+```bash
+# 1. Install backend dependencies
+cd backend
+pip install -r requirements.txt
+
+# 2. Start the server
+python app.py
+```
+
+The app will be available at **http://localhost:5000**
+
+### Sample API Calls (curl)
+
+```bash
+# Health check
+curl http://localhost:5000/api/health
+
+# Register a new user
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"test123","name":"Test User"}'
+
+# Login and get token
+TOKEN=$(curl -s -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"test123"}' | python3 -c "import sys,json; print(json.load(sys.stdin)['token'])")
+
+# Get dashboard
+curl http://localhost:5000/api/dashboard \
+  -H "Authorization: Bearer $TOKEN"
+
+# Log a run
+curl -X POST http://localhost:5000/api/runs \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{"distance_km":5.0,"duration_sec":1500,"date":"2025-01-01"}'
+```
+
+### Deploy to Render (free tier)
+
+1. Fork this repository
+2. Go to [render.com](https://render.com) → **New Web Service**
+3. Connect your repo – Render auto-detects `render.yaml`
+4. Click **Deploy** – your app will be live at `https://fitlife-pwa.onrender.com`
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
